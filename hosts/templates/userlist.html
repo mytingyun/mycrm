@@ -1,0 +1,38 @@
+{% extends 'motherboard.html' %}
+
+{% block content %}
+    <div style="margin: 5px;">
+        <a href="{% url 'userlist' %}" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i>添加用户</a>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>用户名</th>
+            <th>密码</th>
+            <th>管理的主机</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+     <tbody>
+        {% for row in user_queryset %}
+                <tr>
+                    <td>{{ row.id }}</td>
+                    <td>{{ row.username }}</td>
+                    <td>{{ row.password }}</td>
+                    <td>{{ row.manhost }}</td>
+
+                    <td>
+                        <a href="{% url 'useredit' row.id %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>编辑</a>
+                        |
+                        <a href="{% url 'userdel' row.id %}" style="color: red;"><i class="fa fa-trash-o" aria-hidden="true"></i>删除</a>
+                    </td>
+                </tr>
+        {% endfor %}
+
+
+        </tbody>
+
+    </table>
+{% endblock%}
+

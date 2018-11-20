@@ -1,0 +1,36 @@
+{% extends 'motherboard.html' %}
+
+{% block content %}
+    <div style="margin: 5px;">
+        <a href="{% url 'hostadd' %}" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i>添加主机</a>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>主机名</th>
+            <th>功能服务</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+     <tbody>
+        {% for row in host_queryset %}
+                <tr>
+                    <td>{{ row.id }}</td>
+                    <td>{{ row.hostname }}</td>
+                    <td>{{ row.servername }}</td>
+
+                    <td>
+                        <a href="{% url 'hostedit' row.id %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>编辑</a>
+                        |
+                        <a href="{% url 'hostdel' row.id %}" style="color: red;"><i class="fa fa-trash-o" aria-hidden="true"></i>删除</a>
+                    </td>
+                </tr>
+        {% endfor %}
+
+
+        </tbody>
+
+    </table>
+{% endblock%}
+
