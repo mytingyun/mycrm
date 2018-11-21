@@ -13,6 +13,7 @@ def login(request):
         if not user_object:
             return render(request,'login.html',{'error':'用户名或密码错误'})
         request.session[RBAC_SESSION_PERMISSION_KEY] = 'abc123'
+        request.session.set_expiry(0)
         return redirect('/hosts/index/')
     return render(request,'login.html')
 

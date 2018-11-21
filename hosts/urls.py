@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^hosts/edit/(\d+)/$', hostm.hostedit,name='hostedit'),
     url(r'^hosts/del/(\d+)/$', hostm.hostsdel,name='hostdel'),
     url(r'^user/list/$', users.userlist,name='userlist'),
+    url(r'^user/add/$', users.useradd,name='useradd'),
     url(r'^user/edit/(\d+)/$', users.useredit, name='useredit'),
     url(r'^user/del/(\d+)/$', users.userdel, name='userdel'),
 

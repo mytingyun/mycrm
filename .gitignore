@@ -1,0 +1,9 @@
+.idea/
+hostmanage/__pycache__/
+hosts/__pycache__/
+hosts/form/__pycache__/
+hosts/middleware/__pycache__/
+hosts/migrations/__pycache__/
+hosts/views/__pycache__/
+.idea/vcs.xml
+

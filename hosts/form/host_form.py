@@ -24,4 +24,9 @@ class HostModelForm(ModelForm):
 class UserModelForm(ModelForm):
     class Meta:
         model = models.UserList
-        fields = ['username','password']
+        fields = "__all__"
+        widgets = {
+            'username': forms.TextInput(attrs={'class':'form-control','placeholder':'用户名'}),
+            'password': forms.TextInput(attrs={'class':'form-control','placeholder':'密码'}),
+            'manhost': forms.Select(attrs={'class':'form-control','placeholder':'管理的主机'}),
+        }
