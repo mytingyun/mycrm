@@ -1,5 +1,6 @@
 from django.shortcuts import render,HttpResponse,redirect
 from hosts import models
+from django.urls import reverse
 from hosts.form.host_form import HostModelForm,UserModelForm
 
 def userlist(request):
@@ -47,5 +48,8 @@ def userdel(request,nid):
     :param nid:
     :return:
     """
+    cancel = reverse('userlist')
+    if request.method == 'GET':
+        return render(request,'delete.html',{'cancel':cancel})
     models.UserList.objects.filter(id=nid).delete()
-    return redirect('/user/list/')
+    return redirect(cancel)

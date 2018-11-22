@@ -1,5 +1,6 @@
 from django.shortcuts import render,HttpResponse,redirect
 from hosts import models
+from django.urls import reverse
 from hosts.form.host_form import HostModelForm,UserModelForm
 from hostmanage.settings import RBAC_SESSION_PERMISSION_KEY
 
@@ -69,6 +70,9 @@ def hostsdel(request,nid):
     :param nid:
     :return:
     """
+    origin = reverse('hostlist')
+    if request.method == 'GET':
+        return render(request, 'delete.html', {'cancel':origin})
     models.HostManage.objects.filter(id=nid).delete()
-    return redirect('/hosts/list/')
+    return redirect(origin)
 
