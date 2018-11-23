@@ -1,8 +1,10 @@
 {% extends 'motherboard.html' %}
-
+{% load rbac %}
 {% block content %}
     <div style="margin: 5px;">
+    {% if request|has_permission:'useradd'%}
         <a href="{% url 'useradd' %}" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i>添加用户</a>
+    {% endif %}
     </div>
     <table class="table table-bordered">
         <thead>
@@ -11,7 +13,9 @@
             <th>用户名</th>
             <th>密码</th>
             <th>管理的主机</th>
+            {% if request|has_permission:'useredit' or  request|has_permission:'userdel'%}
             <th>操作</th>
+            {% endif %}
         </tr>
         </thead>
      <tbody>
@@ -23,9 +27,13 @@
                     <td>{{ row.manhost }}</td>
 
                     <td>
+                        {% if request|has_permission:'useredit' %}
                         <a href="{% url 'useredit' row.id %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>编辑</a>
+                        {% endif %}
                         |
+                        {% if request|has_permission:'userdel' %}
                         <a href="{% url 'userdel' row.id %}" style="color: red;"><i class="fa fa-trash-o" aria-hidden="true"></i>删除</a>
+                        {% endif %}
                     </td>
                 </tr>
         {% endfor %}

@@ -16,9 +16,11 @@ Including another URLconf
 from django.conf.urls import url,include
 from hosts.views import hostm
 from hosts.views import users
+from django.contrib import admin
 
 urlpatterns = [
-    url(r'^hosts/index/$', hostm.index),
+    url(r'^admin/', admin.site.urls),
+    url(r'^hosts/index/$', hostm.index,name='index'),
     url(r'^login/$', hostm.login),
     url(r'^logout/$', hostm.logout),
     url(r'^hosts/list/$', hostm.lists,name='hostlist'),

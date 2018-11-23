@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'hosts.apps.HostsConfig',
+    'rbac.apps.RbacConfig',
 ]
 
 MIDDLEWARE = [
@@ -48,7 +49,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'hosts.middleware.permit.HostMiddleware',
+    # 'hosts.middleware.permit.HostMiddleware',
+    'rbac.middleware.rbac.RbacMiddleware',
 ]
 
 ROOT_URLCONF = 'hosts.urls'
@@ -123,5 +125,16 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# 权限校验的白名单
+RBAC_VALID_LIST = [
+    '/login/',
+    '/admin.*',
+]
+
+RBAC_NO_PERMISSION_LIST = [
+    '/hosts/index/'
+]
+
 
 RBAC_SESSION_PERMISSION_KEY = 'asdfu3nrsluidfowljer'
+RBAC_SESSION_MENU_KEY = 'fjeiwjofj2312'

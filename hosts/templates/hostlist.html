@@ -1,16 +1,20 @@
 {% extends 'motherboard.html' %}
-
+{% load rbac %}
 {% block content %}
+    {% if request|has_permission:'hostadd'%}
     <div style="margin: 5px;">
         <a href="{% url 'hostadd' %}" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i>添加主机</a>
     </div>
+    {% endif %}
     <table class="table table-bordered">
         <thead>
         <tr>
             <th>ID</th>
             <th>主机名</th>
             <th>功能服务</th>
+            {% if request|has_permission:'hostedit' or  request|has_permission:'hostdel'%}
             <th>操作</th>
+            {% endif %}
         </tr>
         </thead>
      <tbody>
@@ -21,9 +25,13 @@
                     <td>{{ row.servername }}</td>
 
                     <td>
+                        {% if request|has_permission:'hostedit' %}
                         <a href="{% url 'hostedit' row.id %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>编辑</a>
+                        {% endif %}
                         |
+                        {% if request|has_permission:'hostdel' %}
                         <a href="{% url 'hostdel' row.id %}" style="color: red;"><i class="fa fa-trash-o" aria-hidden="true"></i>删除</a>
+                        {% endif %}
                     </td>
                 </tr>
         {% endfor %}
