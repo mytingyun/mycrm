@@ -21,7 +21,7 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^hosts/index/$', hostm.index,name='index'),
-    url(r'^login/$', hostm.login),
+    url(r'^login/$', hostm.login,name='login'),
     url(r'^logout/$', hostm.logout),
     url(r'^hosts/list/$', hostm.lists,name='hostlist'),
     url(r'^hosts/add/$', hostm.hostadd,name='hostadd'),

@@ -131,8 +131,10 @@ RBAC_VALID_LIST = [
     '/admin.*',
 ]
 
+#登陆后无需校验权限
 RBAC_NO_PERMISSION_LIST = [
-    '/hosts/index/'
+    '/hosts/index/',
+    '/logout/'
 ]
 
 

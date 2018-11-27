@@ -85,7 +85,7 @@ def login(request):
 
 
 def logout(request):
-    del request.session[RBAC_SESSION_PERMISSION_KEY]
+    request.session.delete()
     return redirect('/hosts/login/')
 
 

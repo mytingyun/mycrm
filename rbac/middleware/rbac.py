@@ -1,7 +1,8 @@
 import re
 from django.utils.deprecation import MiddlewareMixin
 from django.conf import settings
-from django.shortcuts import HttpResponse
+from django.urls import reverse
+from django.shortcuts import HttpResponse,redirect
 
 
 class RbacMiddleware(MiddlewareMixin):
@@ -34,7 +35,7 @@ class RbacMiddleware(MiddlewareMixin):
         """
         permission_dict = request.session.get(settings.RBAC_SESSION_PERMISSION_KEY)
         if not permission_dict:
-            return HttpResponse('未获取到权限信息，请重新登录！')
+            return redirect(reverse('login'))
 
         for reg in settings.RBAC_NO_PERMISSION_LIST:
             if re.match(reg,request.path_info):
@@ -44,4 +45,4 @@ class RbacMiddleware(MiddlewareMixin):
             url = "^%s$" % url_info['url']
             if re.match(url,request.path_info):
                 return None
-        return HttpResponse('无权访问')
+        return redirect(reverse('login'))
